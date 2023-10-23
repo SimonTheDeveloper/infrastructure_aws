@@ -1,0 +1,29 @@
+name: Terraform Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Initialize Terraform
+      run: terraform init
+
+    - name: Plan Terraform Changes
+      run: terraform plan -out=tfplan
+
+    - name: Apply Terraform Changes
+      run: terraform apply -auto-approve tfplan
+
+    - name: Cleanup
+      run: rm -rf .terraform tfplan
