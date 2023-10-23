@@ -1,4 +1,9 @@
 
+provider "aws" {
+  region = "eu-west-2" # Replace with your desired AWS region
+}
+
+
 resource "aws_s3_bucket" "prod_media" {
   bucket = "kamia-consulting-finance-data-bucket"
 }
