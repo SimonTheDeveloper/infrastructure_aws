@@ -35,9 +35,6 @@ resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
 resource "aws_iam_policy" "create_user_policy" {
   name        = "my_unique_create_user_policy"
   description = "My unique IAM policy for creating users"
-  // Other policy configuration
-
-
   
   policy = jsonencode({
     Version = "2012-10-17",
@@ -47,9 +44,16 @@ resource "aws_iam_policy" "create_user_policy" {
         Effect   = "Allow",
         Resource = "*",
       },
+      // Add other statements for additional permissions if needed
     ],
   })
 }
+resource "aws_iam_user" "aws_infrastructure" {
+  name = "aws_infrastructure"
+
+  permissions_boundary = aws_iam_policy.create_user_policy.arn
+}
+
 
 resource "aws_iam_user" "prod_media_bucket" {
   name = "prod-media-bucket"
