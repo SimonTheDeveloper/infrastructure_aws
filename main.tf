@@ -40,8 +40,11 @@ resource "aws_iam_user" "prod_media_bucket" {
 }
 
 resource "aws_iam_policy" "create_user_policy" {
-  name        = "create_user_policy"
-  description = "Allows IAM user to create IAM users"
+  name        = "my_unique_create_user_policy"
+  description = "My unique IAM policy for creating users"
+  // Other policy configuration
+}
+
   
   policy = jsonencode({
     Version = "2012-10-17",
