@@ -32,13 +32,6 @@ resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
   depends_on = [aws_s3_bucket_public_access_block.example]
 }
 
-resource "aws_iam_user" "prod_media_bucket" {
-  name = "prod-media-bucket"
-  
-  # Attach the IAM policy to the user for creating IAM users
-  permissions_boundary = aws_iam_policy.create_user_policy.arn
-}
-
 resource "aws_iam_policy" "create_user_policy" {
   name        = "my_unique_create_user_policy"
   description = "My unique IAM policy for creating users"
@@ -57,6 +50,15 @@ resource "aws_iam_policy" "create_user_policy" {
     ],
   })
 }
+
+resource "aws_iam_user" "prod_media_bucket" {
+  name = "prod-media-bucket"
+  
+  # Attach the IAM policy to the user for creating IAM users
+  permissions_boundary = aws_iam_policy.create_user_policy.arn
+}
+
+
 
 resource "aws_s3_bucket_public_access_block" "example" {
   bucket = aws_s3_bucket.prod_media.id
