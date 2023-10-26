@@ -43,7 +43,7 @@ resource "aws_iam_policy" "create_user_policy" {
   name        = "my_unique_create_user_policy"
   description = "My unique IAM policy for creating users"
   // Other policy configuration
-}
+
 
   
   policy = jsonencode({
