@@ -10,3 +10,4 @@ crash.log
 terraform.tfstate.backup
 # Ignore .terraformrc file
 .terraformrc
+vpc.tfplan
